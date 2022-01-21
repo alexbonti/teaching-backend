@@ -9,6 +9,14 @@ const app = express()
 
 app.use('/', express.static('public'))
 
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('./swagger.json');
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
+);
+
 app.use('/calculator',calculatorRoute)
 
 app.listen(port, () => {
